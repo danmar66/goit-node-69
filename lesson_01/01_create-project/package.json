@@ -1,0 +1,34 @@
+{
+  "name": "00-create-project",
+  "version": "1.0.0",
+  "description": "My first awesome project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "keywords": [
+    "node",
+    "npm"
+  ],
+  "engines": {
+    "node": "18.14.2",
+    "npm": "9.5.0"
+  },
+  "private": "true",
+  "repository": {
+    "type": "git",
+    "url": "git+http://github.com/repository/name"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
