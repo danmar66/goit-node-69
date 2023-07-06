@@ -1,5 +1,5 @@
 {
-  "name": "6_basic_routing",
+  "name": "02_add-jwt-to-project",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -23,6 +23,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.1.0",
     "morgan": "^1.10.0",
-    "nanoid": "^3.3.4"
+    "nanoid": "^3.3.4",
+    "uuid": "^9.0.0"
   }
 }
