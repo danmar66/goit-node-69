@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="form">
+      <input type="file" name="file" />
+      <button type="submit">Send file</button>
+    </form>
+
+    <script>
+      const form = document.getElementById('form') // шукаємо елемент по id
+      form.addEventListener('submit', function (e) {
+        console.log('post image to server')
+        // додаємо обробник подій, вказуємо тип події submit
+        e.preventDefault() // прериваємо поведінку за замовчуванням, щоб браузер не намагався сам відправити форму
+
+        const formData = new FormData() // створюємо новий об'єект FormData - він вбудований в сам браузер
+        console.log(this.elements) // подивимось на об'єкт FormData, пере
+        formData.append('image', this.elements.file.files[0]) // додаємо наш файл
+
+        const url = 'http://localhost:3000/upload' // вказуємо адресу, куди будемо відправляти запит
+
+        fetch(url, {
+          // користуємось вбудованим методом fetch для відправки нашого запиту
+          method: 'post',
+          body: formData,
+        }).catch((err) => console.log(err))
+      })
+    </script>
+  </body>
+</html>
