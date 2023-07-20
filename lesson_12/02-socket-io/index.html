@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+      integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+      crossorigin="anonymous"
+    ></script>
+    <title>Socket IO Example</title>
+  </head>
+  <body>
+    <form id="form">
+      <label for="user">User</label>
+      <input type="text" name="user" />
+      <label for="message">Message</label>
+      <input type="text" name="message" />
+      <button type="submit">Send</button>
+    </form>
+
+    <ul id="history"></ul>
+
+    <script>
+      const ws = io('http://localhost:5000')
+
+      ws.on('chatMessage', (message) => {
+        addMessage(message)
+      })
+
+      // ------------------------------
+
+      const form = document.getElementById('form')
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        const user = event.target.user.value
+        const message = event.target.message.value
+
+        ws.emit('chatMessage', `${user}: ${message}`)
+        addMessage(`${user}: ${message}`)
+
+        event.target.message.value = ''
+      })
+
+      function addMessage(message) {
+        const history = document.getElementById('history')
+        const li = document.createElement('li')
+        li.innerText = message
+        history.appendChild(li)
+      }
+    </script>
+  </body>
+</html>

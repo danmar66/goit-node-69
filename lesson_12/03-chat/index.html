@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        padding-bottom: 3rem;
+      }
+
+      #form {
+        background: rgba(0, 0, 0, 0.15);
+        padding: 0.5rem;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+      }
+      #input {
+        border: none;
+        padding: 0.5rem 1rem;
+        flex-grow: 1;
+        border-radius: 2rem;
+      }
+      #input:focus {
+        outline: none;
+      }
+
+      #form > button {
+        background: #333;
+        border: none;
+        padding: 0 1rem;
+        margin: 0 1rem;
+        color: #efefef;
+        border-radius: 0.5rem;
+      }
+
+      #history {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      #history > li {
+        padding: 0.5rem 1rem;
+      }
+
+      #history > li:nth-child(odd) {
+        background: #efefef;
+      }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Socket IO Example</title>
+  </head>
+  <body>
+    <form id="form">
+      <input type="text" id="input" name="message" />
+      <button type="submit">Send</button>
+    </form>
+
+    <ul id="history"></ul>
+
+    <script>
+      const username = prompt("What's your name?", 'Anonym')
+      const socket = io()
+
+      // ------------------------------
+
+      const history = document.getElementById('history')
+      const form = document.getElementById('form')
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        // const user = event.target.user.value
+        const message = event.target.message.value
+
+        if (message) {
+          socket.emit('chatMessage', `${username}: ${message}`)
+          addMessage(`${username}: ${message}`)
+          event.target.message.value = ''
+        }
+      })
+
+      function addMessage(message) {
+        const li = document.createElement('li')
+        li.innerText = message
+        history.appendChild(li)
+        window.scrollTo(0, document.body.scrollHeight)
+      }
+
+      socket.on('chatMessage', (message) => {
+        addMessage(message)
+      })
+    </script>
+  </body>
+</html>
