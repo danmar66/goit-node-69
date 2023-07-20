@@ -16,6 +16,6 @@ router.get(
   controllerWrapper(auth),
   controllerWrapper(controller.getInfo)
 )
-router.get('/verify/:token', controllerWrapper(controller.verifyEmail))
+router.get('/verify/:token', controllerWrapper(controller.verifyToken))
 
 module.exports = router

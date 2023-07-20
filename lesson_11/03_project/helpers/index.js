@@ -1,9 +1,9 @@
 const RequestError = require('./RequestError')
 const controllerWrapper = require('./controllerWrapper')
-const sendMail = require('./sendMail')
+const sendEmail = require('./sendEmail')
 
 module.exports = {
   RequestError,
   controllerWrapper,
-  sendMail,
+  sendEmail,
 }

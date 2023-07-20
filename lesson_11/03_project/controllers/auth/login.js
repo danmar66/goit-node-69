@@ -13,7 +13,7 @@ const login = async (req, res) => {
   }
 
   if (!user.verified) {
-    throw RequestError(401, 'Email is not verified! Check your mailbox')
+    throw RequestError(401, 'Email is not verified! Check your mailbox!')
   }
 
   const isValidPassword = await bcrypt.compare(password, user.password)

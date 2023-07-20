@@ -1,8 +1,9 @@
 const { RequestError } = require('../../helpers')
 const User = require('../../models/user')
 
-const verifyEmail = async (req, res) => {
+const verifyToken = async (req, res) => {
   const { token } = req.params
+  const { password } = req.body
 
   const user = await User.findOne({ verifyToken: token })
 
@@ -11,15 +12,15 @@ const verifyEmail = async (req, res) => {
   }
 
   if (user.verified) {
-    throw RequestError(400, 'User have already verificated')
+    throw RequestError(400, 'User has already verified')
   }
 
   await User.findByIdAndUpdate(user._id, {
     verified: true,
-    // verifyToken: null
+    // verifyToken: null,
   })
 
   return res.json({ message: 'Success' })
 }
 
-module.exports = verifyEmail
+module.exports = verifyToken

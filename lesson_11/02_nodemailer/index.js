@@ -1,19 +1,19 @@
 const nodemailer = require('nodemailer')
 require('dotenv').config()
 
-const { EMAIL_PASS, EMAIL_USER } = process.env
+const { EMAIL_USER, EMAIL_PASS } = process.env
 
 async function main() {
   try {
     const email = {
-      from: 'marchenkodanil97@gmail.com',
-      to: 'marchenkodaniel97@gmail.com',
-      subject: 'Nodemailer test',
-      html: '<h1>Hello there</h1>',
-      text: 'Hello there',
+      to: 'marchenkodanil97@gmail.com',
+      from: 'marchenkodanil97@gmail.com', // Use the email address or domain you verified above
+      subject: 'Sending with Nodemailer is Fun',
+      text: 'and easy to do anywhere, even with Node.js',
+      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
     }
 
-    const transport = nodemailer.createTransport({
+    var transport = nodemailer.createTransport({
       host: 'sandbox.smtp.mailtrap.io',
       port: 2525,
       auth: {
@@ -25,7 +25,8 @@ async function main() {
     const response = await transport.sendMail(email)
     console.log(response)
   } catch (error) {
-    console.error('Application Error: ', error)
+    console.error('Application error', error)
   }
 }
+
 main()

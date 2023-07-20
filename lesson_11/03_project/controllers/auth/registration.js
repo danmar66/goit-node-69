@@ -1,5 +1,5 @@
 const User = require('../../models/user')
-const { RequestError, sendMail } = require('../../helpers')
+const { RequestError, sendEmail } = require('../../helpers')
 const bcrypt = require('bcrypt')
 const { v4 } = require('uuid')
 
@@ -18,10 +18,10 @@ const registration = async (req, res) => {
       verifyToken,
     })
 
-    await sendMail({
+    await sendEmail({
       to: email,
       subject: 'Please, confirm your email',
-      html: `<a href="http://localhost:3000/api/users/verify/${verifyToken}">Confirm your email</a>`,
+      html: `<a href="http://localhost:3001/api/users/verify/${verifyToken}">Confirm your email</a>`,
     })
 
     res.status(201).json({ id: result._id, email: result.email })
